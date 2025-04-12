@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Sparkles } from 'lucide-react';
-import { Message } from './ConversationInterface';
+import { Message } from '../types/conversation';
 
 interface MessageBubbleProps {
   message: Message;

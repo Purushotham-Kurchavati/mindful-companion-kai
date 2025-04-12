@@ -8,6 +8,14 @@ interface WelcomeCardProps {
 }
 
 const WelcomeCard: React.FC<WelcomeCardProps> = ({ onGetStarted }) => {
+  const handleFeatureClick = (feature: string) => {
+    // Call onGetStarted to show the conversation interface
+    onGetStarted();
+    // We'll let the parent component know which feature was clicked
+    // The actual implementation will be handled in ConversationInterface
+    localStorage.setItem('selectedFeature', feature);
+  };
+
   return (
     <div className="flex flex-col items-center text-center max-w-md mx-auto bg-white bg-opacity-90 p-8 rounded-2xl shadow-lg border border-mindful-light-purple">
       <div className="mb-6 relative">
@@ -26,18 +34,27 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({ onGetStarted }) => {
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full mb-8">
-        <div className="p-3 bg-mindful-light-purple bg-opacity-50 rounded-lg flex flex-col items-center">
+        <button 
+          onClick={() => handleFeatureClick('journaling')}
+          className="p-3 bg-mindful-light-purple bg-opacity-50 rounded-lg flex flex-col items-center cursor-pointer hover:bg-opacity-70 transition-all"
+        >
           <Feather className="h-5 w-5 text-mindful-deep-purple mb-2" />
           <span className="text-sm font-medium">Journaling</span>
-        </div>
-        <div className="p-3 bg-mindful-calm-blue bg-opacity-50 rounded-lg flex flex-col items-center">
+        </button>
+        <button 
+          onClick={() => handleFeatureClick('mindfulness')}
+          className="p-3 bg-mindful-calm-blue bg-opacity-50 rounded-lg flex flex-col items-center cursor-pointer hover:bg-opacity-70 transition-all"
+        >
           <Heart className="h-5 w-5 text-mindful-deep-purple mb-2" />
           <span className="text-sm font-medium">Mindfulness</span>
-        </div>
-        <div className="p-3 bg-mindful-soft-peach bg-opacity-50 rounded-lg flex flex-col items-center">
+        </button>
+        <button 
+          onClick={() => handleFeatureClick('reflection')}
+          className="p-3 bg-mindful-soft-peach bg-opacity-50 rounded-lg flex flex-col items-center cursor-pointer hover:bg-opacity-70 transition-all"
+        >
           <Sparkles className="h-5 w-5 text-mindful-deep-purple mb-2" />
           <span className="text-sm font-medium">Reflection</span>
-        </div>
+        </button>
       </div>
       
       <Button 
